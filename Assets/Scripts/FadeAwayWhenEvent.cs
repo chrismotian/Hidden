@@ -6,17 +6,15 @@ using UnityEngine.UI;
 public class FadeAwayWhenEvent : MonoBehaviour
 {
     [SerializeField] int gamearrayindex = 0;
-    Color color = Color.white;
     private void Start()
     {
-        color = this.GetComponent<Image>().color;
-        GameManager scoreEvent = GameObject.FindObjectOfType<GameManager>();
-        scoreEvent.OnScoreUp += GameManager_OnScoreUp;
+        GameManager revealEvent = GameObject.FindObjectOfType<GameManager>();
+        revealEvent.OnReveal += GameManager_OnReveal;
     }
 
-    private void GameManager_OnScoreUp(object sender, GameManager.OnScoreUpEventArgs e)
+    private void GameManager_OnReveal(object sender, GameManager.OnRevealEventArgs e)
     {
-        Debug.Log("Event at the index " + e.gamearrayindex + gamearrayindex);
+        Debug.Log("Event at the index " + e.gamearrayindex);
         if (e.gamearrayindex == gamearrayindex) StartCoroutine("Fade");
     }
 
