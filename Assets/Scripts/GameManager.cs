@@ -4,34 +4,33 @@ using UnityEngine;
 
 public class GameManager : MonoBehaviour
 {
-    int[] gamearray;
-
-    int[] probabilityPerFruit;
-
-    int score;
-    int highscore;
-    int ninjaindex;
-
-    List<int> pickedgamearray;
-
-    int pickamount;
+    //The number of buttons/picks on the screen
+    int gamearraylenght = 9;
+    //This array is filled with awards while numbers are coding the awards ( 0 is the jackpot and the normal awards are a number higher than 0)
+    int[] gamearray = null;
+    //Every pick is raising the score
+    int score = 0;
+    //Just an amount of picks are possible and this number is defining this limit
+    int pickamountlimit = 3;
+    //Temporary varaible of the pickamountlimit to store how many picks are done
+    int pickamount = 0;
+    //The position of the jackpot in the gamearray while this can be a number from 0 to gamearray.Length
+    int jackpotindex = 0;
+    //The done picks are stored here because we are not allowed to pick the same gamearrayindex twice, but there is an exception: After a jackpot is picked we are resetting this because we are allowed to pick all indices again
+    List<int> pickedgamearray = null;
 
     void Start()
     {
-        int pickamount = 0;
-        pickedgamearray = new List<int>();
-        gamearray = new int[9];
-        ninjaindex = Random.Range(1,9);
-        gamearray[ninjaindex] = 0;
-        for (int i = 0; i < gamearray.Length; i++)
-        {
-            if (i != ninjaindex) gamearray[i] = Random.Range(1, 3);
-        } 
+        gamearray = new int[gamearraylenght];
+        pickamount = 0;
+        InitilisePicks();
+        Debug.Log("No pick yet while the jackpot is at " + jackpotindex);
     }
 
+    //The UI buttons accessing this and Jackpot() 
     public void Pick(int gamearrayindex)
     {
-        if (!pickedgamearray.Contains(gamearrayindex) && pickamount < 3)
+        if (!pickedgamearray.Contains(gamearrayindex) && pickamount < pickamountlimit)
         {
             switch (gamearray[gamearrayindex])
             {
@@ -50,24 +49,34 @@ public class GameManager : MonoBehaviour
                     pickedgamearray.Add(gamearrayindex);
                     pickamount++;
                     break;
-                default:
-                    break;
             }
         }
-        Debug.Log("Picked now for the "+ pickamount + " time while the ninja is at " + ninjaindex +" and the score is " + score);
+        Debug.Log("Picked now for the "+ pickamount + " time while the jackpot is at " + jackpotindex + " and the score is " + score);
     }
 
     void Jackpot()
     {
         for (int i = 0; i < gamearray.Length; i++)
         {
-            if (i != ninjaindex) Pick(i);
+            if (i != jackpotindex && !pickedgamearray.Contains(i))
+            {
+                //Since Pick(i) is incrementing pickamount we have to decrement it here
+                pickamount--;
+                Pick(i);
+            }
         }
-        ninjaindex = Random.Range(1, 9);
-        gamearray[ninjaindex] = 0;
+        InitilisePicks();
+    }
+
+    //Randomly placing new awards for all picks while placing the one jackpot to a random index too
+    void InitilisePicks()
+    {
+        pickedgamearray = new List<int>();
+        jackpotindex = Random.Range(0, gamearray.Length);
+        gamearray[jackpotindex] = 0;
         for (int i = 0; i < gamearray.Length; i++)
         {
-            if (i != ninjaindex) gamearray[i] = Random.Range(1, 2);
+            if (i != jackpotindex) gamearray[i] = Random.Range(1, 3);
         }
     }
 }
