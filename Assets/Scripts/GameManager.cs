@@ -30,6 +30,7 @@ public class GameManager : MonoBehaviour
         public int score;
         public int item;
     }
+    public event EventHandler OnJackpot;
 
     void Start()
     {
@@ -44,41 +45,46 @@ public class GameManager : MonoBehaviour
     {
         if (!revealedindicies.Contains(gamearrayindex) && revealed < pick)
         {
-            int award = 0;
-            switch (gamearray[gamearrayindex])
+            if (gamearray[gamearrayindex] == 0)
             {
-                case 0:
-                    Jackpot();
-                    revealed++;
-                    break;
-                case 1:
-                    award = maxaward / 1;
-                    revealedindicies.Add(gamearrayindex);
-                    revealed++;
-                    break;
-                case 2:
-                    award = maxaward / 2;
-                    revealedindicies.Add(gamearrayindex);
-                    revealed++;
-                    break;
-                case 3:
-                    award = maxaward / 4;
-                    revealedindicies.Add(gamearrayindex);
-                    revealed++;
-                    break;
-                case 4:
-                    award = maxaward / 8;
-                    revealedindicies.Add(gamearrayindex);
-                    revealed++;
-                    break;
-                case 5:
-                    award = maxaward / 16;
-                    revealedindicies.Add(gamearrayindex);
-                    revealed++;
-                    break;
+                OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex, score = score, item = gamearray[gamearrayindex] });
+                revealed++;
+                Jackpot();
             }
-            score = score + award;
-            OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex,score = score,item = gamearray[gamearrayindex] });
+            else
+            {
+                int award = 0;
+                switch (gamearray[gamearrayindex])
+                {
+                    case 1:
+                        award = maxaward / 1;
+                        revealedindicies.Add(gamearrayindex);
+                        revealed++;
+                        break;
+                    case 2:
+                        award = maxaward / 2;
+                        revealedindicies.Add(gamearrayindex);
+                        revealed++;
+                        break;
+                    case 3:
+                        award = maxaward / 4;
+                        revealedindicies.Add(gamearrayindex);
+                        revealed++;
+                        break;
+                    case 4:
+                        award = maxaward / 8;
+                        revealedindicies.Add(gamearrayindex);
+                        revealed++;
+                        break;
+                    case 5:
+                        award = maxaward / 16;
+                        revealedindicies.Add(gamearrayindex);
+                        revealed++;
+                        break;
+                }
+                score = score + award;
+                OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex, score = score, item = gamearray[gamearrayindex] });
+            }
         }else if(revealed == pick){
             Assert.IsTrue(score <= (gamearray.Length - 1) * pick * maxaward);
         }
@@ -91,12 +97,13 @@ public class GameManager : MonoBehaviour
         {
             if (i != jackpotindex && !revealedindicies.Contains(i))
             {
-                //Since Pick(i) is incrementing pickamount we have to decrement it here
+                //Since TryReveal(i) is incrementing pickamount we have to decrement it here
                 revealed--;
                 TryReveal(i);
             }
         }
         InitilizeGamearray();
+        OnJackpot?.Invoke(this, System.EventArgs.Empty);
     }
 
     //Randomly placing new awards for all picks while placing the one jackpot to a random index too
