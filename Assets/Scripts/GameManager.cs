@@ -6,7 +6,8 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-
+    int maxaward = 16;
+    public Sprite[] spriteArray = null;
     //The number of buttons on the screen
     int gamearraylenght = 9;
     //This array is filled with items while numbers are coding the items (0 is the jackpot and other items are a number higher than 0)
@@ -26,6 +27,8 @@ public class GameManager : MonoBehaviour
     public class OnRevealEventArgs : EventArgs
     {
         public int gamearrayindex;
+        public int score;
+        public int item;
     }
 
     void Start()
@@ -41,6 +44,7 @@ public class GameManager : MonoBehaviour
     {
         if (!revealedindicies.Contains(gamearrayindex) && revealed < pick)
         {
+            int award = 0;
             switch (gamearray[gamearrayindex])
             {
                 case 0:
@@ -48,19 +52,35 @@ public class GameManager : MonoBehaviour
                     revealed++;
                     break;
                 case 1:
-                    score = score + 20;
+                    award = maxaward / 1;
                     revealedindicies.Add(gamearrayindex);
                     revealed++;
                     break;
                 case 2:
-                    score = score + 10;
+                    award = maxaward / 2;
+                    revealedindicies.Add(gamearrayindex);
+                    revealed++;
+                    break;
+                case 3:
+                    award = maxaward / 4;
+                    revealedindicies.Add(gamearrayindex);
+                    revealed++;
+                    break;
+                case 4:
+                    award = maxaward / 8;
+                    revealedindicies.Add(gamearrayindex);
+                    revealed++;
+                    break;
+                case 5:
+                    award = maxaward / 16;
                     revealedindicies.Add(gamearrayindex);
                     revealed++;
                     break;
             }
-            OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex });
+            score = score + award;
+            OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex,score = score,item = gamearray[gamearrayindex] });
         }else if(revealed == pick){
-            Assert.IsTrue(score <= (gamearray.Length - 1) * 3 * 20);
+            Assert.IsTrue(score <= (gamearray.Length - 1) * pick * maxaward);
         }
         Debug.Log("Revealed now the "+ revealed + " time while the jackpot is at " + jackpotindex + " and the score is " + score);
     }
@@ -87,7 +107,7 @@ public class GameManager : MonoBehaviour
         gamearray[jackpotindex] = 0;
         for (int i = 0; i < gamearray.Length; i++)
         {
-            if (i != jackpotindex) gamearray[i] = UnityEngine.Random.Range(1, 3);
+            if (i != jackpotindex) gamearray[i] = UnityEngine.Random.Range(1, 6);
         }
     }
 }
