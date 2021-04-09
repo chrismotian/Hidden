@@ -1,9 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
+    public event EventHandler<OnScoreUpEventArgs> OnScoreUp;
+    public class OnScoreUpEventArgs: EventArgs
+    {
+        public int gamearrayindex;
+    }
     //The number of buttons/picks on the screen
     int gamearraylenght = 9;
     //This array is filled with awards while numbers are coding the awards ( 0 is the jackpot and the normal awards are a number higher than 0)
@@ -50,6 +56,7 @@ public class GameManager : MonoBehaviour
                     pickamount++;
                     break;
             }
+            OnScoreUp?.Invoke(this, new OnScoreUpEventArgs { gamearrayindex = gamearrayindex });
         }
         Debug.Log("Picked now for the "+ pickamount + " time while the jackpot is at " + jackpotindex + " and the score is " + score);
     }
@@ -72,11 +79,11 @@ public class GameManager : MonoBehaviour
     void InitilisePicks()
     {
         pickedgamearray = new List<int>();
-        jackpotindex = Random.Range(0, gamearray.Length);
+        jackpotindex = UnityEngine.Random.Range(0, gamearray.Length);
         gamearray[jackpotindex] = 0;
         for (int i = 0; i < gamearray.Length; i++)
         {
-            if (i != jackpotindex) gamearray[i] = Random.Range(1, 3);
+            if (i != jackpotindex) gamearray[i] = UnityEngine.Random.Range(1, 3);
         }
     }
 }
