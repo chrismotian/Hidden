@@ -810,6 +810,8 @@ GameObject:
   - component: {fileID: 598836099}
   - component: {fileID: 598836098}
   - component: {fileID: 598836100}
+  - component: {fileID: 598836102}
+  - component: {fileID: 598836101}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -829,6 +831,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e2e9435e46b370c46b8f7e959044e36c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  splitspriteArray:
+  - {fileID: 21300000, guid: b008802f1112c0e4ba8b9cdb3b2f76bb, type: 3}
+  - {fileID: 21300000, guid: ee9623232beacf440bba88f38c2e578d, type: 3}
+  - {fileID: 21300000, guid: b0472cd12f537854980c5c32d958ac52, type: 3}
+  - {fileID: 21300000, guid: 70625cc8e1eb44745969f0e89e1171aa, type: 3}
+  - {fileID: 21300000, guid: 959c767e859c0394fb8e71772a35fbe6, type: 3}
+  - {fileID: 21300000, guid: 1469a71e590f3c8468a4362e59a9abf0, type: 3}
   Jackpotparticle: {fileID: 2430333463768614543, guid: f3cca4ece8e5f2e46ac1093c239e8d43,
     type: 3}
   spriteArray:
@@ -867,6 +876,114 @@ MonoBehaviour:
   cooldown: 0.4
   obj:
   - {fileID: 1414995914738351326, guid: ec706efe42f09a248aaf6a0f327a3f1b, type: 3}
+--- !u!114 &598836101
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598836097}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f2a352ebb2e46c840b3330a1d8fea953, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!82 &598836102
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 598836097}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 0
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &617915999
 GameObject:
   m_ObjectHideFlags: 0
@@ -954,10 +1071,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8b1c167fcf5d4fac707b3c1dfbe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "ninjat\u014D": {fileID: 1947557630387991147, guid: a0fab1336d35f204c9661bc20f1c022c,
-    type: 3}
-  "ninjat\u014Do": {fileID: 5328550637809089522, guid: 7b88c769a13490542a72d5974b6c7f4d,
-    type: 3}
   gamearrayindex: 1
 --- !u!1 &635904008
 GameObject:
@@ -1046,10 +1159,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8b1c167fcf5d4fac707b3c1dfbe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "ninjat\u014D": {fileID: 1947557630387991147, guid: a0fab1336d35f204c9661bc20f1c022c,
-    type: 3}
-  "ninjat\u014Do": {fileID: 5328550637809089522, guid: 7b88c769a13490542a72d5974b6c7f4d,
-    type: 3}
   gamearrayindex: 4
 --- !u!1 &673191215
 GameObject:
@@ -1571,10 +1680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8b1c167fcf5d4fac707b3c1dfbe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "ninjat\u014D": {fileID: 1947557630387991147, guid: a0fab1336d35f204c9661bc20f1c022c,
-    type: 3}
-  "ninjat\u014Do": {fileID: 5328550637809089522, guid: 7b88c769a13490542a72d5974b6c7f4d,
-    type: 3}
   gamearrayindex: 7
 --- !u!1 &839903972
 GameObject:
@@ -1663,10 +1768,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8b1c167fcf5d4fac707b3c1dfbe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "ninjat\u014D": {fileID: 1947557630387991147, guid: a0fab1336d35f204c9661bc20f1c022c,
-    type: 3}
-  "ninjat\u014Do": {fileID: 5328550637809089522, guid: 7b88c769a13490542a72d5974b6c7f4d,
-    type: 3}
   gamearrayindex: 5
 --- !u!1 &849626778
 GameObject:
@@ -1755,10 +1856,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8b1c167fcf5d4fac707b3c1dfbe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "ninjat\u014D": {fileID: 1947557630387991147, guid: a0fab1336d35f204c9661bc20f1c022c,
-    type: 3}
-  "ninjat\u014Do": {fileID: 5328550637809089522, guid: 7b88c769a13490542a72d5974b6c7f4d,
-    type: 3}
   gamearrayindex: 2
 --- !u!1 &925932659
 GameObject:
@@ -1847,10 +1944,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8b1c167fcf5d4fac707b3c1dfbe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "ninjat\u014D": {fileID: 1947557630387991147, guid: a0fab1336d35f204c9661bc20f1c022c,
-    type: 3}
-  "ninjat\u014Do": {fileID: 5328550637809089522, guid: 7b88c769a13490542a72d5974b6c7f4d,
-    type: 3}
   gamearrayindex: 6
 --- !u!1 &1067952214
 GameObject:
@@ -2040,10 +2133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8b1c167fcf5d4fac707b3c1dfbe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "ninjat\u014D": {fileID: 1947557630387991147, guid: a0fab1336d35f204c9661bc20f1c022c,
-    type: 3}
-  "ninjat\u014Do": {fileID: 5328550637809089522, guid: 7b88c769a13490542a72d5974b6c7f4d,
-    type: 3}
   gamearrayindex: 3
 --- !u!1 &1272132064
 GameObject:
@@ -2561,10 +2650,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8b1c167fcf5d4fac707b3c1dfbe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "ninjat\u014D": {fileID: 1947557630387991147, guid: a0fab1336d35f204c9661bc20f1c022c,
-    type: 3}
-  "ninjat\u014Do": {fileID: 5328550637809089522, guid: 7b88c769a13490542a72d5974b6c7f4d,
-    type: 3}
   gamearrayindex: 0
 --- !u!1 &1538722017
 GameObject:
@@ -2697,6 +2782,133 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538722017}
   m_CullTransparentMesh: 0
+--- !u!1 &1544233990
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1544233992}
+  - component: {fileID: 1544233991}
+  m_Layer: 0
+  m_Name: Backgroundsound
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!82 &1544233991
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544233990}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: a91460dded691474283952eb9c564827, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &1544233992
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1544233990}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 638.99335, y: 425.7412, z: -91.98872}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1633168742
 GameObject:
   m_ObjectHideFlags: 0
@@ -3016,10 +3228,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f5c8b1c167fcf5d4fac707b3c1dfbe65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  "ninjat\u014D": {fileID: 1947557630387991147, guid: a0fab1336d35f204c9661bc20f1c022c,
-    type: 3}
-  "ninjat\u014Do": {fileID: 5328550637809089522, guid: 7b88c769a13490542a72d5974b6c7f4d,
-    type: 3}
   gamearrayindex: 8
 --- !u!1 &1882322147
 GameObject:

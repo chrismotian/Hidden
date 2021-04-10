@@ -6,6 +6,7 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    public Sprite[] splitspriteArray = null;
     [SerializeField] GameObject Jackpotparticle = null;
     //Contains the sprites while the position [0] is for the jackpot and the lowest award is at [1] because from the index 1 the calculated award is: 2 to the power of index
     public Sprite[] spriteArray = null;
@@ -50,15 +51,17 @@ public class GameManager : MonoBehaviour
             int item = gamearray[gamearrayindex];
             if (item == 0)
             {
-                OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex, score = score, item = gamearray[gamearrayindex] });
+                SoundManager.PlaySound("jackpot");
+                OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex, score = score, item = item });
                 GameObject instance = (GameObject)Instantiate(Jackpotparticle, Vector3.zero, Quaternion.identity);
                 instance.transform.parent = this.transform;
                 Jackpot();
-
                 score = score * 2;
+                OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex, score = score, item = item });
             }
             else
             {
+                SoundManager.PlaySound("reveal");
                 revealedindicies.Add(gamearrayindex);
                 int award = (int)Mathf.Pow(2, item);
                 score = score + award;
