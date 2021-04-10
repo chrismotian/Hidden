@@ -6,9 +6,9 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
-    int maxaward = 16;
+    //Contains the sprites while the position [0] is for the jackpot and the lowest award is at [1] because from the index 1 the calculated award is: 2 to the power of index
     public Sprite[] spriteArray = null;
-    //The number of buttons on the screen
+    //Has to be the same as the number of buttons on the screen
     int gamearraylenght = 9;
     //This array is filled with items while numbers are coding the items (0 is the jackpot and other items are a number higher than 0)
     int[] gamearray = null;
@@ -22,7 +22,7 @@ public class GameManager : MonoBehaviour
     int jackpotindex = 0;
     //The revealed gamearray indicies are stored here because we are not allowed to reveal the same gamearrayindex twice, but there is an exception: After a jackpot is revealed there is a reset of this because the whole gamearray is initialized again
     List<int> revealedindicies = null;
-    //UI control is done with this event
+    //UI control is done with this events
     public event EventHandler<OnRevealEventArgs> OnReveal;
     public class OnRevealEventArgs : EventArgs
     {
@@ -45,48 +45,21 @@ public class GameManager : MonoBehaviour
     {
         if (!revealedindicies.Contains(gamearrayindex) && revealed < pick)
         {
+            revealed++;
             if (gamearray[gamearrayindex] == 0)
             {
                 OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex, score = score, item = gamearray[gamearrayindex] });
-                revealed++;
                 Jackpot();
             }
             else
             {
-                int award = 0;
-                switch (gamearray[gamearrayindex])
-                {
-                    case 1:
-                        award = maxaward / 1;
-                        revealedindicies.Add(gamearrayindex);
-                        revealed++;
-                        break;
-                    case 2:
-                        award = maxaward / 2;
-                        revealedindicies.Add(gamearrayindex);
-                        revealed++;
-                        break;
-                    case 3:
-                        award = maxaward / 4;
-                        revealedindicies.Add(gamearrayindex);
-                        revealed++;
-                        break;
-                    case 4:
-                        award = maxaward / 8;
-                        revealedindicies.Add(gamearrayindex);
-                        revealed++;
-                        break;
-                    case 5:
-                        award = maxaward / 16;
-                        revealedindicies.Add(gamearrayindex);
-                        revealed++;
-                        break;
-                }
+                revealedindicies.Add(gamearrayindex);
+                int award = (int)Mathf.Pow(2, gamearray[gamearrayindex]);
                 score = score + award;
                 OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex, score = score, item = gamearray[gamearrayindex] });
             }
         }else if(revealed == pick){
-            Assert.IsTrue(score <= (gamearray.Length - 1) * pick * maxaward);
+            Assert.IsTrue(score <= (gamearray.Length - 1) * pick * (int)Mathf.Pow(2, spriteArray.Length));
         }
         Debug.Log("Revealed now the "+ revealed + " time while the jackpot is at " + jackpotindex + " and the score is " + score);
     }
@@ -102,8 +75,8 @@ public class GameManager : MonoBehaviour
                 TryReveal(i);
             }
         }
-        InitilizeGamearray();
         OnJackpot?.Invoke(this, System.EventArgs.Empty);
+        InitilizeGamearray();
     }
 
     //Randomly placing new awards for all picks while placing the one jackpot to a random index too

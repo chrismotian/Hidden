@@ -16,10 +16,4 @@ public class ChangeTextWhenEvent : MonoBehaviour
         Debug.Log("Event at the index " + e.gamearrayindex);
         this.GetComponent<Text>().text = "Score: " + e.score;
     }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
