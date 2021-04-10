@@ -18,7 +18,7 @@ public class FullOpacityWhenEvent : MonoBehaviour
 
     IEnumerator FullOpacity()
     {
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
         Color c = this.gameObject.GetComponent<Image>().color;
         c.a = 1;
         this.gameObject.GetComponent<Image>().color = c;

@@ -16,6 +16,20 @@ public class ChangePictureWhenEvent : MonoBehaviour
     private void GameManager_OnReveal(object sender, GameManager.OnRevealEventArgs e)
     {
         Debug.Log("Event at the index " + e.gamearrayindex);
-        if (e.gamearrayindex == gamearrayindex) this.gameObject.GetComponent<Image>().sprite = instance.spriteArray[e.item];
+        if (e.gamearrayindex == gamearrayindex)
+        {
+            this.gameObject.GetComponent<Image>().sprite = instance.spriteArray[e.item];
+            if (e.item == 0) StartCoroutine("Rotate");
+            
+        }
+    }
+
+    IEnumerator Rotate()
+    {
+        for (int i = 0; i < 360; i=i+2)
+        {
+            transform.RotateAround(this.transform.position,Vector3.forward,2);
+            yield return new WaitForSeconds(0.0001f);
+        }
     }
 }

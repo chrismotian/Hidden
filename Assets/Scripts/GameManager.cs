@@ -6,6 +6,7 @@ using System;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] GameObject Jackpotparticle = null;
     //Contains the sprites while the position [0] is for the jackpot and the lowest award is at [1] because from the index 1 the calculated award is: 2 to the power of index
     public Sprite[] spriteArray = null;
     //Has to be the same as the number of buttons on the screen
@@ -46,20 +47,25 @@ public class GameManager : MonoBehaviour
         if (!revealedindicies.Contains(gamearrayindex) && revealed < pick)
         {
             revealed++;
-            if (gamearray[gamearrayindex] == 0)
+            int item = gamearray[gamearrayindex];
+            if (item == 0)
             {
                 OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex, score = score, item = gamearray[gamearrayindex] });
+                GameObject instance = (GameObject)Instantiate(Jackpotparticle, Vector3.zero, Quaternion.identity);
+                instance.transform.parent = this.transform;
                 Jackpot();
+
+                score = score * 2;
             }
             else
             {
                 revealedindicies.Add(gamearrayindex);
-                int award = (int)Mathf.Pow(2, gamearray[gamearrayindex]);
+                int award = (int)Mathf.Pow(2, item);
                 score = score + award;
-                OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex, score = score, item = gamearray[gamearrayindex] });
+                OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = gamearrayindex, score = score, item = item });
             }
         }else if(revealed == pick){
-            Assert.IsTrue(score <= (gamearray.Length - 1) * pick * (int)Mathf.Pow(2, spriteArray.Length));
+            Assert.IsTrue(score <= (gamearray.Length - 1) * pick * (int)Mathf.Pow(2, spriteArray.Length) * 2);
         }
         Debug.Log("Revealed now the "+ revealed + " time while the jackpot is at " + jackpotindex + " and the score is " + score);
     }
