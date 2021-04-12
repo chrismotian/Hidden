@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ChangeScoreWhenEvent : MonoBehaviour
 {
+    [SerializeField] bool highscore = false;
     private void Start()
     {
         GameManager revealEvent = GameObject.FindObjectOfType<GameManager>();
@@ -13,22 +14,51 @@ public class ChangeScoreWhenEvent : MonoBehaviour
 
     private void GameManager_OnReveal(object sender, GameManager.OnRevealEventArgs e)
     {
-        Debug.Log("Event at the index " + e.gamearrayindex);
-        if(e.score < 10)
-        {
-            this.GetComponent<Text>().text = "000"+ e.score;
+        if((highscore && e.gamearrayindex == -1) || (!highscore && e.gamearrayindex >= 0)) {
+            Debug.Log("Event at the index " + e.gamearrayindex + " and the score is " + e.score);
+            ChangeScore(e.score);
         }
-        else if(e.score < 100)
+    }
+    void ChangeScore(int score)
+    {
+        if (score < 10)
         {
-            this.GetComponent<Text>().text = "00" + e.score;
+            this.GetComponent<Text>().text = "000" + score;
         }
-        else if (e.score < 1000)
+        else if (score < 100)
         {
-            this.GetComponent<Text>().text = "0" + e.score;
+            this.GetComponent<Text>().text = "00" + score;
+        }
+        else if (score < 1000)
+        {
+            this.GetComponent<Text>().text = "0" + score;
         }
         else
         {
-            this.GetComponent<Text>().text = "" + e.score;
+            this.GetComponent<Text>().text = "" + score;
         }
+    }
+    public void ScoreQuery() {
+        Highscore instance = GameObject.FindObjectOfType<Highscore>();
+        int score = instance.score;
+        ChangeScore(score);
+        if(score > Highscore.LoadFile())
+        {
+            SoundManager.PlaySound("win");
+            Highscore.SaveFile(score);
+        }
+        else
+        {
+            SoundManager.PlaySound("lose");
+        }
+    }
+    public void ScoreHighQuery()
+    {
+        ChangeScore(Highscore.LoadFile());
+    }
+    public void DestroyHighscore()
+    {
+        Highscore instance = GameObject.FindObjectOfType<Highscore>();
+        Destroy(instance.gameObject);
     }
 }

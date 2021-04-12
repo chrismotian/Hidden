@@ -28,7 +28,7 @@ public static class SceneLoader
         // This is particularly good for creating loading screens.
         // You could also load the Scene by using sceneBuildIndex. 
 
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(scenenumber);
+        AsyncOperation asyncLoad = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync(scenenumber);
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)

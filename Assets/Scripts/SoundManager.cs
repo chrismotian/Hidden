@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SoundManager : MonoBehaviour
 {
-    public static AudioClip clickSound, revealSound, jackpotSound;
+    public static AudioClip clickSound, revealSound, jackpotSound, loseSound, winSound;
     static AudioSource audioSrc;
     // Start is called before the first frame update
     void Start()
@@ -12,6 +12,8 @@ public class SoundManager : MonoBehaviour
         clickSound = Resources.Load<AudioClip>("click");
         revealSound = Resources.Load<AudioClip>("reveal");
         jackpotSound = Resources.Load<AudioClip>("jackpot");
+        loseSound = Resources.Load<AudioClip>("lose");
+        winSound = Resources.Load<AudioClip>("win");
 
         audioSrc = GetComponent<AudioSource>();
 
@@ -35,6 +37,12 @@ public class SoundManager : MonoBehaviour
                 break;
             case "jackpot":
                 audioSrc.PlayOneShot(jackpotSound);
+                break;
+            case "lose":
+                audioSrc.PlayOneShot(loseSound);
+                break;
+            case "win":
+                audioSrc.PlayOneShot(winSound);
                 break;
         }
     }

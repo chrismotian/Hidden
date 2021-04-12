@@ -14,7 +14,7 @@ public class GameManager : MonoBehaviour
     //This array is filled with items while numbers are coding the items (0 is the jackpot and other items are a number higher than 0)
     int[] gamearray = null;
     //Every reveal is raising the score
-    int score = 0;
+    public int score = 0;
     //Just an certain amount of picks is possible and this number defines this limit
     int pick = 3;
     //Saves how many choices are revealed while this can be a number from 0 to pick
@@ -37,6 +37,8 @@ public class GameManager : MonoBehaviour
 
     void Start()
     {
+        int highscore = Highscore.LoadFile();
+        OnReveal?.Invoke(this, new OnRevealEventArgs { gamearrayindex = -1, score = highscore, item = -1 });
         gamearray = new int[gamearraylenght];
         revealed = 0;
         InitilizeGamearray();
@@ -70,6 +72,8 @@ public class GameManager : MonoBehaviour
             }
             if (revealed >= 3)
             {
+                Highscore instance = GameObject.FindObjectOfType<Highscore>(); 
+                instance.score = score;
                 SceneLoader.LoadScene(3,4);
             }
         }
@@ -111,8 +115,5 @@ public class GameManager : MonoBehaviour
             if (i != jackpotindex) gamearray[i] = UnityEngine.Random.Range(1, 6);
         }
     }
-    public void LoadScene(int scenenumber)
-    {
-        SceneLoader.LoadScene(scenenumber, 1);
-    }
+
 }

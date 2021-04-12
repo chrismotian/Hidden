@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class DontDestroyMe : MonoBehaviour
 {
-    public static DontDestroyMe instance = null;				//Static instance of GameManager which allows it to be accessed by any other script.
+    public static DontDestroyMe instance = null;
 
     void Awake(){
         //Check if instance already exists
@@ -16,7 +16,7 @@ public class DontDestroyMe : MonoBehaviour
         //If instance already exists and it's not this:
         else if (instance != this)
 
-            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a GameManager.
+            //Then destroy this. This enforces our singleton pattern, meaning there can only ever be one instance of a the GameObject.
             Destroy(gameObject);
 
         //Sets this to not be destroyed when reloading scene
