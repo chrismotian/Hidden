@@ -112,7 +112,7 @@ public class GameManager : MonoBehaviour
         gamearray[jackpotindex] = 0;
         for (int i = 0; i < gamearray.Length; i++)
         {
-            if (i != jackpotindex) gamearray[i] = UnityEngine.Random.Range(1, 6);
+            if (i != jackpotindex) gamearray[i] = UnityEngine.Random.Range(1, 9);
         }
     }
 

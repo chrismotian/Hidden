@@ -1,10 +1,17 @@
-reading description and writing concept, 6-7pm TH 
-analyse the times and prototype: Gamemanager is initialising the array and setting the random elements. There is also implemented a method with an arrayindex as a parameter which is raining the score and "disabling" a cell while the jackpot logic is implemented here too. The buttons and a text with points are the only UI elements, 7-9pm TH
+Hidden in the yachts by Christian
 
-Work on graphics and animation, FR
+Description:
+Game of chance/Picker game with a highscore.
+The 9 choices will be awarded with fruits or ninjas.
+Every round 3 picks are possible.
+The bigger the fruit, the higher the score. 
+If the ninja is the award the player (is lucky) gets all the points from the fruits and then everything gets doubled. If there are still picks available new fruits will be in the game and one new ninja.
+After a round the score is fixed, if the score is higher than the highscore its a win and if not its a lose. 
+The player can play a new round to beat his highscore.
 
-Menu, SA
+Resources:
+https://www.fontspace.com/toona-font-f58622
+https://www.looperman.com/loops/detail/199909/real-ukulele-lofi-chords-ocean-20k-downloads-omg-65bpm-lo-fi-ukulele-loop
+https://www.youtube.com/watch?v=ugjg1zTtEb0
 
-Mobile, 9-11am MO
-
-Flow in a game of chance: pick game: highscore, The M*N pickable things will be awarded with fruits or ninjas... The bigger the fruit the higher the score and if the ninja is the pick the player (is lucky) gets all the points from the fruits there. Every round the player has Y picks and if a ninja is picked new fruits will be in the game and one new ninja but after a round the score is fixed and the player can play a new round to beat his highscore, 11-6pm MO
+Thanks to my younger brother Julian
